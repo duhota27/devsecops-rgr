@@ -19,7 +19,7 @@ jobs:
         run: docker build -t devsecops-rgr-app .
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.24.0
+        uses: aquasecurity/trivy-action@0.25.0
         with:
           image-ref: 'devsecops-rgr-app'
           format: 'table'
