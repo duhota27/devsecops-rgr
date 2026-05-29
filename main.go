@@ -14,6 +14,8 @@ func hashPassword(password string) string {
 
 func handler(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("X-Frame-Options", "DENY")
+    w.Header().Set("X-Content-Type-Options", "nosniff")
+    w.Header().Set("Content-Security-Policy", "default-src 'self'")
 
     if r.Method != http.MethodGet {
         http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
