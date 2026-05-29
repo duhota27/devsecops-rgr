@@ -1,6 +1,7 @@
 package main
 
 import (
+    "crypto/tls"
     "crypto/sha256"
     "fmt"
     "net/http"
@@ -17,16 +18,25 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    // имитация "пароля системы"
     password := "admin123"
     hashed := hashPassword(password)
 
-    // вывод в консоль
     fmt.Println("Original password:", password)
     fmt.Println("Hashed password (SHA-256):", hashed)
 
     http.HandleFunc("/", handler)
 
-    fmt.Println("Server started on :8080")
-    http.ListenAndServe(":8080", nil)
+    fmt.Println("Server started on https://localhost:8443")
+
+    server := &http.Server{
+        Addr: ":8443",
+        TLSConfig: &tls.Config{
+            MinVersion: tls.VersionTLS12,
+        },
+    }
+
+    err := server.ListenAndServeTLS("cert.pem", "key.pem")
+    if err != nil {
+        fmt.Println("HTTPS error:", err)
+    }
 }
