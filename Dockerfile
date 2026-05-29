@@ -16,8 +16,10 @@ RUN adduser -D appuser
 WORKDIR /home/appuser
 
 COPY --from=builder /app/app .
+COPY cert.pem .
+COPY key.pem .
 
-RUN chown appuser:appuser app
+RUN chown appuser:appuser app cert.pem key.pem
 
 USER appuser
 

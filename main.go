@@ -22,7 +22,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    fmt.Fprintln(w, "DevSecOps RGR App is running")
+    fmt.Fprintln(w, "DevSecOps RGR App is running!")
 }
 
 func main() {
