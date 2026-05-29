@@ -14,6 +14,12 @@ func hashPassword(password string) string {
 
 func handler(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("X-Frame-Options", "DENY")
+
+    if r.Method != http.MethodGet {
+        http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+        return
+    }
+
     fmt.Fprintln(w, "DevSecOps RGR App is running")
 }
 
