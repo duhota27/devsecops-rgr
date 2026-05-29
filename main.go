@@ -12,6 +12,7 @@ func hashPassword(password string) string {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("X-Frame-Options", "DENY")
     fmt.Fprintln(w, "DevSecOps RGR App is running")
 }
 
